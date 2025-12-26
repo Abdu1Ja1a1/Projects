@@ -33,6 +33,7 @@ python keylogger.py
 ```
 
 While the script is running:
+- Press F1 to toggle recording ON/OFF(OFF by default)
 - Key presses are printed to the console
 - Character keys are appended to `keyfile.txt`
 
