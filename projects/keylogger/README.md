@@ -3,6 +3,10 @@
 ## Overview
 This repository contains a small Python script that listens for keyboard press events using `pynput` and appends typed characters to a local file
 
+## Legal / Ethical Warning
+Only run this script on systems you own or have explicit permission to monitor
+Unauthorized monitoring of keyboard input may be illegal and unethical
+
 ## What it does
 - Listens for **key press** events
 - Prints each key event to the terminal
@@ -36,10 +40,6 @@ To stop the script:
 - Close the terminal window or
 - Press `Ctrl + C`
 
-## Legal / Ethical Warning
-Only run this script on systems you own or have explicit permission to monitor
-Unauthorized monitoring of keyboard input may be illegal and unethical
-
 ## License
-Add a license file if you plan to make this repository public
+MIT
 
