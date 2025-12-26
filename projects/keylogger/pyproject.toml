@@ -1,0 +1,10 @@
+[project]
+name = "keyboard-event-logger"
+version = "0.1.0"
+requires-python = ">=3.10"
+author = [
+    {name = "Abdul Jalal Raoufi"}
+]
+readme = "README.md"
+licent = {text = "MIT"}
+dependencies = ["pynput"]
