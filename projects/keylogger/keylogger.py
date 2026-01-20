@@ -102,6 +102,8 @@ class keylogger:
             key_type=key_type,
         )
 
+
+
     def keyPressed(self, key):
     
         if key == self.toggle_key:

@@ -42,7 +42,6 @@ class test_keylogger:
 
         def test_build_event_uses_datetime(self):
                 logger = keylogger()
-
                 ev = logger.build_event("ENTER", KeyType.SPECIAL)
                 assert isinstance(ev.timestamp, datetime)
                 assert ev.key == "ENTER"
