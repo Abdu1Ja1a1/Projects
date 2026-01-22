@@ -21,7 +21,7 @@ Projects in this repository may use:
 - Python
 
 ## Status
-Initial setup — projects will be added soon.
+Developing a keylogger
 
 ## Author
 Abdul Jalal Raoufi
