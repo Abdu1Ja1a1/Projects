@@ -1,5 +1,8 @@
 from datetime import datetime, timezone
 from keylogger import KeyEvent, KeyType, keylogger
+import json
+from pathlib import Path
+
 class test_keylogger:
 
         def test_toggle(self):
@@ -13,7 +16,7 @@ class test_keylogger:
 
                 print("Toggle test has PASSED")
 
-        def test_key_event_model(self):
+        def test_key_event(self):
                 now = datetime.now(timezone.utc)
 
                 ev = KeyEvent(
@@ -40,7 +43,7 @@ class test_keylogger:
 
                 print("KeyEvent model test has PASSED")
 
-        def test_build_event_uses_datetime(self):
+        def test_datetime(self):
                 logger = keylogger()
                 ev = logger.build_event("ENTER", KeyType.SPECIAL)
                 assert isinstance(ev.timestamp, datetime)
@@ -49,11 +52,32 @@ class test_keylogger:
 
                 print("KeyEvent builder test has PASSED")
 
+        def test_jsonl_written_when_recording(tmp_path):
+                log_path = "test_log.jsonl"
+
+                logger = keylogger()
+                logger.keyFile = Path(log_path)
+                logger.recording = True
+
+                logger.keyPressed(key="ENTER")
+
+                assert logger.keyFile.exists(),"file does not exist"
+
+                lines = logger.keyFile.read_text(encoding="utf-8").splitlines()
+              
+                assert len(lines) == 1,"There is more than 1 line when there is meant to be one"
+                data = json.loads(lines[0])
+                assert data["key"] == "[ENTER]","incorrect key recorded"
+                assert data["key_type"] == "special","incorrect key type recorded"
+
+                print("json writing test has PASSED")
+                
 def run_tests():
         tests=test_keylogger()
         tests.test_toggle()
-        tests.test_key_event_model()
-        tests.test_build_event_uses_datetime()
+        tests.test_key_event()
+        tests.test_datetime()
+        tests.test_jsonl_written_when_recording()
         print("ALL TESTS HAS PASSED")
 
 if __name__ == "__main__":
