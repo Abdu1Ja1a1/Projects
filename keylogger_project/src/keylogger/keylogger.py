@@ -21,7 +21,6 @@ class KeyType(Enum):
     SPECIAL = auto()
     UNKNOWN = auto()
 
-
 @dataclass
 class KeyEvent:
 
