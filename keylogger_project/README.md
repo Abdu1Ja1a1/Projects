@@ -10,12 +10,12 @@ Unauthorized monitoring of keyboard input may be illegal and unethical
 ## What it does
 - Listens for **key press** events
 - Prints each key event to the terminal
-- Appends **character keys** (e.g., `a`, `b`, `1`) to `keyfile.txt`
+- Appends **character keys** (e.g., `a`, `b`, `1`) to `keyfile.jsonl`
 - Ignores non-character keys (e.g., Shift, Ctrl, Enter) and prints an error message for those
 
 ## Files
 - `keylogger.py` (or your script filename): main script
-- `keyfile.txt`: created automatically when keys are pressed while the script is running
+- `keyfile.jsonl`: created automatically when keys are pressed while the script is running
 
 ## Requirements
 - Python 3.x
@@ -35,7 +35,7 @@ python keylogger.py
 While the script is running:
 - Press F1 to toggle recording ON/OFF(OFF by default)
 - Key presses are printed to the console
-- Character keys are appended to `keyfile.txt`
+- Character keys are appended to `keyfile.jsonl`
 
 To stop the script:
 - Close the terminal window or

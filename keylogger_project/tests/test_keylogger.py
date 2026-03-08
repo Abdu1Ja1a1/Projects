@@ -1,10 +1,12 @@
 import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 from datetime import datetime, timezone
-from keylogger import KeyEvent, KeyType, keylogger
+from src.keylogger.keylogger import KeyEvent, KeyType, keylogger
 from pynput.keyboard import Key , KeyCode
 import json
 from tempfile import TemporaryDirectory
-from pathlib import Path
+
 
 class test_keylogger:
 
